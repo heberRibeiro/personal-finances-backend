@@ -5,7 +5,7 @@ const { connection } = mongoose;
 
 connection.once('open', () => {
   connectedToMongoDB = true;
-  console.log('Connected to MongoDB');
+  console.log('(2 of 3) Connected to MongoDB');
 
   /**
    * Port definition and
@@ -13,6 +13,6 @@ connection.once('open', () => {
    */
   const APP_PORT = process.env.PORT || 3001;
   app.listen(APP_PORT, () => {
-    console.log(`Server started on port ${APP_PORT}`);
+    console.log(`(3 of 3) Server started on port ${APP_PORT}`);
   });
 });

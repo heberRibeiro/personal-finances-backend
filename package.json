@@ -14,8 +14,8 @@
     "nodemon": "2.0.4"
   },
   "scripts": {
-    "server": "nodemon server.js",
-    "start": "node server.js"
+    "server": "nodemon ./src/server.js",
+    "start": "node ./src/server.js"
   },
   "engines": {
     "node": "12.9.1"

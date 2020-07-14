@@ -12,7 +12,7 @@ dotenv.config();
  */
 const { DB_CONNECTION } = process.env;
 
-console.log('Starting connection to MongoDB...');
+console.log('(1 of 3) Starting connection to MongoDB...');
 mongoose.connect(
   DB_CONNECTION,
   {
