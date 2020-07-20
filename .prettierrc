@@ -9,5 +9,5 @@
   "semi": true,
   "jsxSingleQuote": true,
   "endOfLine": "lf",
-  "requirePragma": true
+  "requirePragma": false
 }
