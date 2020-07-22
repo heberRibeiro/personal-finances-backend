@@ -23,7 +23,24 @@ const findByPeriod = async (req, res) => {
   let documents;
   await TransactionModel.find({ year, month }, (err, res) => {
     const lenght = res.length;
-    const result = { lenght, transaction: res };
+
+    const income = res.reduce((acc, curr) => {
+      if (curr.type === '+') {
+        acc += curr.value;
+      }
+      return acc;
+    }, 0);
+
+    const expenses = res.reduce((acc, curr) => {
+      if (curr.type === '-') {
+        acc += curr.value;
+      }
+      return acc;
+    }, 0);
+
+    const balance = income - expenses;
+
+    let result = { lenght, income, expenses, balance, transaction: res };
 
     documents = JSON.stringify(result);
   });
