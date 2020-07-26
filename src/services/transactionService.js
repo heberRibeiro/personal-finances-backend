@@ -9,7 +9,7 @@ const findAll = async (req, res) => {
     const result = { lenght, transaction: res };
 
     documents = JSON.stringify(result);
-  });
+  }).sort({ yearMonthDay: 1 });
 
   res.send(documents);
 };
@@ -43,7 +43,7 @@ const findByPeriod = async (req, res) => {
     let result = { lenght, income, expenses, balance, transaction: res };
 
     documents = JSON.stringify(result);
-  });
+  }).sort({ yearMonthDay: 1 });
 
   res.send(documents);
 };
