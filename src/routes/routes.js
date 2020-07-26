@@ -6,5 +6,6 @@ const transactionService = require('../services/transactionService');
 router.get('/', transactionService.findAll);
 router.get('/period', transactionService.findByPeriod);
 router.put('/:id', transactionService.update);
+router.delete('/:id', transactionService.remove);
 
 module.exports = router;

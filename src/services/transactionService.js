@@ -60,7 +60,14 @@ const update = async (req, res) => {
     });
   }
 
-  res.send({ message: 'Grade atualizado com sucesso' });
+  res.send({ message: 'Transaction atualizada com sucesso' });
 };
 
-module.exports = { findAll, findByPeriod, update };
+const remove = async (req, res) => {
+  const id = req.params.id;
+  await TransactionModel.deleteOne({ _id: id });
+
+  res.send({ message: 'Transaction deletada com sucesso' });
+};
+
+module.exports = { findAll, findByPeriod, update, remove };
