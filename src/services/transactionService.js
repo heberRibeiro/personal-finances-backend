@@ -70,4 +70,11 @@ const remove = async (req, res) => {
   res.send({ message: 'Transaction deletada com sucesso' });
 };
 
-module.exports = { findAll, findByPeriod, update, remove };
+const create = async (req, res) => {
+  const data = req.body;
+  await TransactionModel.create(data);
+
+  res.send({ message: 'Transaction criada com sucesso' });
+};
+
+module.exports = { findAll, findByPeriod, update, remove, create };

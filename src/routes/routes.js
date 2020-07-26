@@ -7,5 +7,6 @@ router.get('/', transactionService.findAll);
 router.get('/period', transactionService.findByPeriod);
 router.put('/:id', transactionService.update);
 router.delete('/:id', transactionService.remove);
+router.post('/', transactionService.create);
 
 module.exports = router;
