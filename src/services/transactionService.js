@@ -48,4 +48,19 @@ const findByPeriod = async (req, res) => {
   res.send(documents);
 };
 
-module.exports = { findAll, findByPeriod };
+const update = async (req, res) => {
+  const id = req.params.id;
+  const dataToReplacement = req.body;
+
+  await TransactionModel.replaceOne({ _id: id }, dataToReplacement);
+
+  if (!req.body) {
+    return res.status(400).send({
+      message: 'Dados para atualização vazio',
+    });
+  }
+
+  res.send({ message: 'Grade atualizado com sucesso' });
+};
+
+module.exports = { findAll, findByPeriod, update };
