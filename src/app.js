@@ -1,27 +1,25 @@
-/**
- * @prettier
- */
 const express = require('express');
 const cors = require('cors');
 
-const routes = require('./routes/routes');
+const database = require('./config/connectionDB');
+const routes = require('./routes');
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-/**
- * Root route
- */
-app.get('/api/', (_, response) => {
-  response.send({
-    message: 'Welcome to the release API. Go to / transaction and follow the guidelines',
-  });
-});
+const configureExpress = () => {
+  app.use(cors());
+  app.use(express.json());
+  app.use('/', routes);
+  app.database = database;
 
-/**
- * Main app routes
- */
-app.use('/api/transaction', routes);
+  return app;
+};
 
-module.exports = app;
+module.exports = async () => {
+  const app = configureExpress();
+  await app.database.connect();
+
+  console.info('Database connection established');
+
+  return app;
+};

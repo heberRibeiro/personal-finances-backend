@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 let schema = mongoose.Schema({
-  _is: String,
+  _id: String,
   description: String,
   value: Number,
   category: String,
@@ -13,6 +13,6 @@ let schema = mongoose.Schema({
   type: String,
 });
 
-const TransactionModel = mongoose.model('transaction', schema);
+const transaction = mongoose.model('transaction', schema);
 
-module.exports = TransactionModel;
+module.exports = transaction;

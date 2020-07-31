@@ -1,18 +1,32 @@
-const app = require('./app');
-const mongoose = require('./connectionDB');
+const setupApp = require('./app');
 
-const { connection } = mongoose;
+const APP_PORT = process.env.PORT || 3001;
 
-connection.once('open', () => {
-  connectedToMongoDB = true;
-  console.log('(2 of 3) Connected to MongoDB');
+(async () => {
+  try {
+    const app = await setupApp();
+    const server = app.listen(APP_PORT, () => {
+      console.info(`App running on port ${APP_PORT}`);
+    });
 
-  /**
-   * Port definition and
-   * app launch
-   */
-  const APP_PORT = process.env.PORT || 3001;
-  app.listen(APP_PORT, () => {
-    console.log(`(3 of 3) Server started on port ${APP_PORT}`);
-  });
-});
+    const exitSignals = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
+    exitSignals.map((sig) =>
+      process.on(sig, () =>
+        server.close((err) => {
+          if (err) {
+            console.error(err);
+            process.exit(1);
+          }
+          app.database.connection.close(function () {
+            console.info('Database connection closed!');
+            process.exit(0);
+          });
+        }),
+      ),
+    );
+    //
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+})();

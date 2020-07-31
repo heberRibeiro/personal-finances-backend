@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const transactionService = require('../services/transactionService');
+const transactionService = require('../controllers/transactions');
 
 router.get('/', transactionService.findAll);
 router.get('/period', transactionService.findByPeriod);
